@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\ProjetWebProg.csproj": {}
+    "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\ProjetWebProg.csproj": {}
   },
   "projects": {
-    "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\ProjetWebProg.csproj": {
+    "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\ProjetWebProg.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\ProjetWebProg.csproj",
+        "projectUniqueName": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\ProjetWebProg.csproj",
         "projectName": "ProjetWebProg",
-        "projectPath": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\ProjetWebProg.csproj",
-        "packagesPath": "C:\\Users\\2433883\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\obj\\",
+        "projectPath": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\ProjetWebProg.csproj",
+        "packagesPath": "C:\\Users\\1331144\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\2433883\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\1331144\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -51,6 +51,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
