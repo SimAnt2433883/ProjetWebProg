@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjetWebProg")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+839e2653d475163e952ade39440995d8f758ab6c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a808541db0604e29d82397ec0acc8ba72c0f208c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjetWebProg")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjetWebProg")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
