@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProjetWebProg.Data;
+using Serilog;
 using System.Text;
 
 namespace ProjetWebProg;
@@ -49,6 +50,17 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Host.UseSerilog((context, config) =>
+        {
+            config.WriteTo.Console()
+            .ReadFrom.Configuration(context.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithEnvironmentName()
+            .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName);
+        });
+
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -56,6 +68,8 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseSerilogRequestLogging();
 
         app.UseHttpsRedirection();
         app.UseAuthentication();

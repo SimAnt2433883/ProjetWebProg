@@ -8,6 +8,7 @@
 bin/
 obj/
 .vs/
+Logs/
 
 # User-specific stuff
 .idea/**/workspace.xml
