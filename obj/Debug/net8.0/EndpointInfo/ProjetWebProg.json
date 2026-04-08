@@ -254,6 +254,10 @@
             "type": "string",
             "nullable": true
           },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
           "nbrInventaire": {
             "type": "integer",
             "format": "int32"
