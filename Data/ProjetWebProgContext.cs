@@ -15,6 +15,7 @@ public class ProjetWebProgContext(DbContextOptions<ProjetWebProgContext> options
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ToutousConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
     }
 
 }

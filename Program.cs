@@ -20,7 +20,7 @@ public class Program
         // For Identity
         builder.Services.AddIdentityCore<IdentityUser>()
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ProjetWebProgContext>() // ? Corrigé ici
+            .AddEntityFrameworkStores<ProjetWebProgContext>()
             .AddDefaultTokenProviders();
 
         // Adding Authentication
