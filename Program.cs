@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ProjetWebProg.Auth;
 using ProjetWebProg.Data;
 using Serilog;
 using System.Text;
@@ -60,6 +61,7 @@ public class Program
             .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName);
         });
 
+        builder.Services.AddScoped<IAuthManager, AuthManager>();
 
         var app = builder.Build();
 
