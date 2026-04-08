@@ -7,7 +7,7 @@ using ProjetWebProg.Data.SeedConfigurations;
 
 namespace ProjetWebProg.Data;
 
-public class ProjetWebProgContext(DbContextOptions<ProjetWebProgContext> options) : DbContext(options)
+public class ProjetWebProgContext(DbContextOptions<ProjetWebProgContext> options) : IdentityDbContext<IdentityUser>(options)
 {
     public DbSet<Toutous> Toutous { get; set; } = default!;
 
