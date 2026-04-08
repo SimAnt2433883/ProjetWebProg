@@ -1,17 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\",
+  "WorkspaceRootPath": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\1331144\\documents\\code\\prog4\\projetwebprog\\data\\toutous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:data\\toutous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\2433883\\documents\\code\\projetwebprog\\controllers\\toutouscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:controllers\\toutouscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\1331144\\documents\\code\\prog4\\projetwebprog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\2433883\\documents\\code\\projetwebprog\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\1331144\\documents\\code\\prog4\\projetwebprog\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\2433883\\documents\\code\\projetwebprog\\data\\toutous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:data\\toutous.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\2433883\\documents\\code\\projetwebprog\\data\\projetwebprogcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:data\\projetwebprogcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|c:\\users\\2433883\\documents\\code\\projetwebprog\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{09768DD4-CAC0-4EEC-AEF3-A2E58246519D}|ProjetWebProg.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -27,23 +35,49 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ToutousController.cs",
+              "DocumentMoniker": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Controllers\\ToutousController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ToutousController.cs",
+              "ToolTip": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Controllers\\ToutousController.cs",
+              "RelativeToolTip": "Controllers\\ToutousController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T12:22:06.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProjetWebProgContext.cs",
+              "DocumentMoniker": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Data\\ProjetWebProgContext.cs",
+              "RelativeDocumentMoniker": "Data\\ProjetWebProgContext.cs",
+              "ToolTip": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Data\\ProjetWebProgContext.cs",
+              "RelativeToolTip": "Data\\ProjetWebProgContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T12:21:23.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Toutous.cs",
-              "DocumentMoniker": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\Data\\Toutous.cs",
+              "DocumentMoniker": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Data\\Toutous.cs",
               "RelativeDocumentMoniker": "Data\\Toutous.cs",
-              "ToolTip": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\Data\\Toutous.cs",
+              "ToolTip": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Data\\Toutous.cs",
               "RelativeToolTip": "Data\\Toutous.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-03T17:32:26.004Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\appsettings.json",
+              "ToolTip": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -53,11 +87,11 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\1331144\\Documents\\Code\\Prog4\\ProjetWebProg\\Program.cs",
+              "ToolTip": "C:\\Users\\2433883\\Documents\\Code\\ProjetWebProg\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABTAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T12:48:52.896Z",
               "EditorCaption": ""
