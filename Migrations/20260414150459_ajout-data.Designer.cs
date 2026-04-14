@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetWebProg.Data;
 
@@ -11,9 +12,11 @@ using ProjetWebProg.Data;
 namespace ProjetWebProg.Migrations
 {
     [DbContext(typeof(ProjetWebProgContext))]
-    partial class ProjetWebProgContextModelSnapshot : ModelSnapshot
+    [Migration("20260414150459_ajout-data")]
+    partial class ajoutdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f6817105-e5c1-4736-b2c8-0b0cc1b10dc9",
+                            Id = "70c0a638-4e32-4c5a-bf69-fdb7d41661ea",
                             Name = "admin",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "6e7bade6-50ea-4f20-8d46-e45600fa1052",
+                            Id = "26e2f0ea-3cc7-4529-bf36-b26568800c3f",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
@@ -254,41 +257,6 @@ namespace ProjetWebProg.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Commande");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Payee = false,
-                            UserId = "a049c840-f589-46d3-9466-27237c9379ad"
-                        });
-                });
-
-            modelBuilder.Entity("ProjetWebProg.Data.CommandeToutous", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Quantite")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ToutousId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CommandeToutous");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Quantite = 10,
-                            ToutousId = 4
-                        });
                 });
 
             modelBuilder.Entity("ProjetWebProg.Data.Toutous", b =>
