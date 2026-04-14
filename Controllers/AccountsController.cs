@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjetWebProg.Auth;
 
 namespace ProjetWebProg.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController(IAuthManager authManager) : ControllerBase
@@ -47,6 +49,13 @@ namespace ProjetWebProg.Controllers
             if (authResponse is null)
                 return Unauthorized();
             return Ok(authResponse);
+        }
+
+        //GET : username
+        [HttpGet]
+        public async Task<ActionResult> UserName()
+        {
+            return Ok();
         }
     }
 }
