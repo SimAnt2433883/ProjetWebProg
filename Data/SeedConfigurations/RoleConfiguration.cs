@@ -19,8 +19,6 @@ namespace ProjetWebProg.Data.SeedConfigurations
                     Name = "Utilisateur",
                     NormalizedName = "UTILISATEUR"
                 });
-            
-            //throw new NotImplementedException();
         }
     }
 }

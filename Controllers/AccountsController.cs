@@ -9,19 +9,19 @@ namespace ProjetWebProg.Controllers
     {
         private readonly IAuthManager _authManager = authManager;
         // POST: api/Account/register-admin
-        [HttpPost]
-        [Route("register-admin")]
-        public async Task<ActionResult> RegisterAdmin([FromBody] Models.RegisterModel register)
-        {
-            var errors = await _authManager.RegisterAdmin(register);
-            if (errors.Any())
-            {
-                foreach (var error in errors)
-                    ModelState.AddModelError(error.Code, error.Description);
-                return BadRequest(ModelState);
-            }
-            return Ok();
-        }
+        //[HttpPost]
+        //[Route("register-admin")]
+        //public async Task<ActionResult> RegisterAdmin([FromBody] Models.RegisterModel register)
+        //{
+        //    var errors = await _authManager.RegisterAdmin(register);
+        //    if (errors.Any())
+        //    {
+        //        foreach (var error in errors)
+        //            ModelState.AddModelError(error.Code, error.Description);
+        //        return BadRequest(ModelState);
+        //    }
+        //    return Ok();
+        //}
 
         // POST: api/Account/register-utilisateur
         [HttpPost]
