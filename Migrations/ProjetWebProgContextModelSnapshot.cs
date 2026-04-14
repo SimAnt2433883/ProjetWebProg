@@ -51,13 +51,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0e29ec6d-3a25-4cab-9ada-ae327eb0d8a2",
+                            Id = "c74dbe90-8db0-4be4-908a-29b5cb6e1f2b",
                             Name = "admin",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "b84c63fa-fb01-41a0-980e-756398d31cd8",
+                            Id = "edf74b99-cab3-4a6a-aab0-b0623dfcbd2e",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
@@ -234,6 +234,28 @@ namespace ProjetWebProg.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ProjetWebProg.Data.Commande", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Payee")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Commande");
+                });
+
             modelBuilder.Entity("ProjetWebProg.Data.Toutous", b =>
                 {
                     b.Property<int>("Id")
@@ -243,11 +265,9 @@ namespace ProjetWebProg.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NbrInventaire")
@@ -388,6 +408,17 @@ namespace ProjetWebProg.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjetWebProg.Data.Commande", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

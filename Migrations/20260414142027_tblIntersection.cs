@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialRoles : Migration
+    public partial class tblIntersection : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,8 +60,8 @@ namespace ProjetWebProg.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prix = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NbrInventaire = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -175,13 +175,33 @@ namespace ProjetWebProg.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Commande",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Payee = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Commande", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Commande_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0e29ec6d-3a25-4cab-9ada-ae327eb0d8a2", null, "admin", "ADMINISTRATEUR" },
-                    { "b84c63fa-fb01-41a0-980e-756398d31cd8", null, "Utilisateur", "UTILISATEUR" }
+                    { "c74dbe90-8db0-4be4-908a-29b5cb6e1f2b", null, "admin", "ADMINISTRATEUR" },
+                    { "edf74b99-cab3-4a6a-aab0-b0623dfcbd2e", null, "Utilisateur", "UTILISATEUR" }
                 });
 
             migrationBuilder.InsertData(
@@ -237,6 +257,11 @@ namespace ProjetWebProg.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Commande_UserId",
+                table: "Commande",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -256,6 +281,9 @@ namespace ProjetWebProg.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Commande");
 
             migrationBuilder.DropTable(
                 name: "Toutous");
