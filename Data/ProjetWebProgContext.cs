@@ -16,6 +16,8 @@ public class ProjetWebProgContext(DbContextOptions<ProjetWebProgContext> options
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ToutousConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new CommandeConfiguration());
+        modelBuilder.ApplyConfiguration(new CommandeToutousConfiguration());
     }
 
 public DbSet<ProjetWebProg.Data.Commande> Commande { get; set; } = default!;
