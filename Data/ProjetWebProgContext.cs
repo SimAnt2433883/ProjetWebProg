@@ -20,6 +20,6 @@ public class ProjetWebProgContext(DbContextOptions<ProjetWebProgContext> options
         modelBuilder.ApplyConfiguration(new CommandeToutousConfiguration());
     }
 
-public DbSet<ProjetWebProg.Data.Commande> Commande { get; set; } = default!;
-
+    public DbSet<Commande> Commande { get; set; } = default!;
+    public DbSet<CommandeToutous> CommandeToutous {  get; set; } = default!;
 }

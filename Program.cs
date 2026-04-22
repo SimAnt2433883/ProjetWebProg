@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ProjetWebProg.Auth;
+using ProjetWebProg.Configuration;
 using ProjetWebProg.Data;
 using Serilog;
 using System.Text;
@@ -60,6 +61,8 @@ public class Program
             .Enrich.WithEnvironmentName()
             .Enrich.WithProperty("ApplicationName", context.HostingEnvironment.ApplicationName);
         });
+
+        builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(AutoMapperConfig).Assembly));
 
         builder.Services.AddScoped<IAuthManager, AuthManager>();
 
