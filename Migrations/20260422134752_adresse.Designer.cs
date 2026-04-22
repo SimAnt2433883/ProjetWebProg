@@ -12,8 +12,8 @@ using ProjetWebProg.Data;
 namespace ProjetWebProg.Migrations
 {
     [DbContext(typeof(ProjetWebProgContext))]
-    [Migration("20260414150459_ajout-data")]
-    partial class ajoutdata
+    [Migration("20260422134752_adresse")]
+    partial class adresse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,38 @@ namespace ProjetWebProg.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CommandeToutous", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CommandeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCommande")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdToutou")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantite")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ToutousId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommandeId");
+
+                    b.HasIndex("ToutousId");
+
+                    b.ToTable("CommandeToutous");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -54,13 +86,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "70c0a638-4e32-4c5a-bf69-fdb7d41661ea",
-                            Name = "admin",
+                            Id = "90792394-343f-4d21-8030-cf8cce042b16",
+                            Name = "Administrateur",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "26e2f0ea-3cc7-4529-bf36-b26568800c3f",
+                            Id = "27fe11c7-faad-4671-9fd8-f0725a78f4c2",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
@@ -245,12 +277,35 @@ namespace ProjetWebProg.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("NoCivique")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomRue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Payee")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Pays")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeRue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Ville")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -282,6 +337,11 @@ namespace ProjetWebProg.Migrations
 
                     b.Property<int>("Prix")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
@@ -360,6 +420,21 @@ namespace ProjetWebProg.Migrations
                             Nom = "Coco",
                             Prix = 18
                         });
+                });
+
+            modelBuilder.Entity("CommandeToutous", b =>
+                {
+                    b.HasOne("ProjetWebProg.Data.Commande", "Commande")
+                        .WithMany()
+                        .HasForeignKey("CommandeId");
+
+                    b.HasOne("ProjetWebProg.Data.Toutous", "Toutous")
+                        .WithMany()
+                        .HasForeignKey("ToutousId");
+
+                    b.Navigation("Commande");
+
+                    b.Navigation("Toutous");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
