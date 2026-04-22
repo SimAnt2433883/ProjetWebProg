@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetWebProg.Data;
+using ProjetWebProg.Models.Commande;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -13,10 +15,12 @@ namespace ProjetWebProg.Controllers
     public class CommandesController : ControllerBase
     {
         private readonly ProjetWebProgContext _context;
+        private readonly IMapper _mapper;
 
-        public CommandesController(ProjetWebProgContext context)
+        public CommandesController(ProjetWebProgContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Commandes
@@ -74,12 +78,28 @@ namespace ProjetWebProg.Controllers
         // POST: api/Commandes
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Commande>> PostCommande(Commande commande)
+        public async Task<ActionResult<PostCommandeDTO>> PostCommande(PostCommandeDTO commandeDto)
         {
+            Commande commande = _mapper.Map<Commande>(commandeDto);
+            commande.UserId = GetUserName();
+            commande.Payee = false;
+
             _context.Commande.Add(commande);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCommande", new { id = commande.Id }, commande);
+            foreach (var (idToutou, quantite) in commandeDto.IdsToutousQuantites)
+            {
+                _context.CommandeToutous.Add(new CommandeToutous
+                {
+                    IdCommande = commande.Id,
+                    IdToutou = idToutou,
+                    Quantite = quantite
+                });
+            }
+            await _context.SaveChangesAsync();
+
+            PostCommandeDTO result = _mapper.Map<PostCommandeDTO>(commande);
+            return CreatedAtAction(nameof(GetCommande), new { id = commande.Id }, result);
         }
 
         // DELETE: api/Commandes/5

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class miseAJour : Migration
+    public partial class adresse : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +62,8 @@ namespace ProjetWebProg.Migrations
                     Prix = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NbrInventaire = table.Column<int>(type: "int", nullable: false)
+                    NbrInventaire = table.Column<int>(type: "int", nullable: false),
+                    Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,7 +183,13 @@ namespace ProjetWebProg.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Payee = table.Column<bool>(type: "bit", nullable: false)
+                    Payee = table.Column<bool>(type: "bit", nullable: false),
+                    NoCivique = table.Column<int>(type: "int", nullable: false),
+                    TypeRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ville = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pays = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,13 +202,40 @@ namespace ProjetWebProg.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CommandeToutous",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCommande = table.Column<int>(type: "int", nullable: false),
+                    IdToutou = table.Column<int>(type: "int", nullable: false),
+                    Quantite = table.Column<int>(type: "int", nullable: false),
+                    CommandeId = table.Column<int>(type: "int", nullable: true),
+                    ToutousId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommandeToutous", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommandeToutous_Commande_CommandeId",
+                        column: x => x.CommandeId,
+                        principalTable: "Commande",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CommandeToutous_Toutous_ToutousId",
+                        column: x => x.ToutousId,
+                        principalTable: "Toutous",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6e7bade6-50ea-4f20-8d46-e45600fa1052", null, "Utilisateur", "UTILISATEUR" },
-                    { "f6817105-e5c1-4736-b2c8-0b0cc1b10dc9", null, "admin", "ADMINISTRATEUR" }
+                    { "27fe11c7-faad-4671-9fd8-f0725a78f4c2", null, "Utilisateur", "UTILISATEUR" },
+                    { "90792394-343f-4d21-8030-cf8cce042b16", null, "Administrateur", "ADMINISTRATEUR" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,6 +296,16 @@ namespace ProjetWebProg.Migrations
                 name: "IX_Commande_UserId",
                 table: "Commande",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommandeToutous_CommandeId",
+                table: "CommandeToutous",
+                column: "CommandeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommandeToutous_ToutousId",
+                table: "CommandeToutous",
+                column: "ToutousId");
         }
 
         /// <inheritdoc />
@@ -283,13 +327,16 @@ namespace ProjetWebProg.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CommandeToutous");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "Commande");
 
             migrationBuilder.DropTable(
                 name: "Toutous");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

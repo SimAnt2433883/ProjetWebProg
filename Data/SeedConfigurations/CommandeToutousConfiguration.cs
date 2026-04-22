@@ -7,9 +7,7 @@ namespace ProjetWebProg.Data.SeedConfigurations
     {
         public void Configure(EntityTypeBuilder<CommandeToutous> builder)
         {
-            builder.HasData(
-                new CommandeToutous { Id = 1, ToutousId = 4, Quantite = 10 }
-            );
+
         }
     }
 }
