@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetWebProg.Data;
 
@@ -11,9 +12,11 @@ using ProjetWebProg.Data;
 namespace ProjetWebProg.Migrations
 {
     [DbContext(typeof(ProjetWebProgContext))]
-    partial class ProjetWebProgContextModelSnapshot : ModelSnapshot
+    [Migration("20260414151224_ajout-data2")]
+    partial class ajoutdata2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f6817105-e5c1-4736-b2c8-0b0cc1b10dc9",
+                            Id = "47b42130-431c-4aa7-9ccf-d6b55c288828",
                             Name = "admin",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "6e7bade6-50ea-4f20-8d46-e45600fa1052",
+                            Id = "c3663c8e-45d2-4fda-a74c-18789add06a7",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
