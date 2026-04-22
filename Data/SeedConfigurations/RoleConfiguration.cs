@@ -11,7 +11,7 @@ namespace ProjetWebProg.Data.SeedConfigurations
             builder.HasData(
                 new IdentityRole
                 {
-                    Name = "admin",
+                    Name = "Administrateur",
                     NormalizedName = "ADMINISTRATEUR",
                 },
                 new IdentityRole

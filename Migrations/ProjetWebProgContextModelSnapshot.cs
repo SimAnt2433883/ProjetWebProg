@@ -51,13 +51,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "47b42130-431c-4aa7-9ccf-d6b55c288828",
+                            Id = "f6817105-e5c1-4736-b2c8-0b0cc1b10dc9",
                             Name = "admin",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "c3663c8e-45d2-4fda-a74c-18789add06a7",
+                            Id = "6e7bade6-50ea-4f20-8d46-e45600fa1052",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });

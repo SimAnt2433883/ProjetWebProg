@@ -1,4 +1,6 @@
-﻿namespace ProjetWebProg.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetWebProg.Data
 {
     public class Toutous
     {
@@ -10,5 +12,9 @@
         public string? Image { get; set; }
 
         public int NbrInventaire { get; set; }
+
+        [Timestamp]
+        public byte[]? Version { get; set; }
+
     }
 }
