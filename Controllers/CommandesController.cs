@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetWebProg.Data;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace ProjetWebProg.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class CommandesController : ControllerBase
@@ -24,6 +21,7 @@ namespace ProjetWebProg.Controllers
 
         // GET: api/Commandes
         [HttpGet]
+        [Authorize(Roles = "Administrateur")]
         public async Task<ActionResult<IEnumerable<Commande>>> GetCommande()
         {
             return await _context.Commande.ToListAsync();
@@ -31,6 +29,7 @@ namespace ProjetWebProg.Controllers
 
         // GET: api/Commandes/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Commande>> GetCommande(int id)
         {
             Commande? commande = await _context.Commande.FindAsync(id);
@@ -43,6 +42,7 @@ namespace ProjetWebProg.Controllers
 
         // PUT: api/Commandes/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrateur")]
         public async Task<IActionResult> PutCommande(int id, Commande commande)
         {
             if (id != commande.Id)
@@ -73,6 +73,7 @@ namespace ProjetWebProg.Controllers
 
         // POST: api/Commandes
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Commande>> PostCommande(Commande commande)
         {
             _context.Commande.Add(commande);
@@ -83,6 +84,7 @@ namespace ProjetWebProg.Controllers
 
         // DELETE: api/Commandes/5
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Administrateur")]
         public async Task<IActionResult> DeleteCommande(int id)
         {
             var commande = await _context.Commande.FindAsync(id);

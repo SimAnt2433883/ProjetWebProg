@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class tblIntersection : Migration
+    public partial class miseAJour : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -200,8 +200,8 @@ namespace ProjetWebProg.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "c74dbe90-8db0-4be4-908a-29b5cb6e1f2b", null, "admin", "ADMINISTRATEUR" },
-                    { "edf74b99-cab3-4a6a-aab0-b0623dfcbd2e", null, "Utilisateur", "UTILISATEUR" }
+                    { "6e7bade6-50ea-4f20-8d46-e45600fa1052", null, "Utilisateur", "UTILISATEUR" },
+                    { "f6817105-e5c1-4736-b2c8-0b0cc1b10dc9", null, "admin", "ADMINISTRATEUR" }
                 });
 
             migrationBuilder.InsertData(
