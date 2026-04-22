@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetWebProg.Data;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace ProjetWebProg.Controllers
 {
@@ -105,6 +102,12 @@ namespace ProjetWebProg.Controllers
         private bool CommandeExists(int id)
         {
             return _context.Commande.Any(e => e.Id == id);
+        }
+
+        public string? GetUserName()
+        {
+            return HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
+            ?? HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
     }
 }
