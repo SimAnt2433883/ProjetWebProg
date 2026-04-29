@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class dtoCommande : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -253,8 +253,8 @@ namespace ProjetWebProg.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "071b9d73-7f6f-4692-88f7-28c0b7aa6cb4", null, "Utilisateur", "UTILISATEUR" },
-                    { "e89b8c12-d134-4883-b550-b1fd0c498438", null, "Administrateur", "ADMINISTRATEUR" }
+                    { "77a1162c-f441-4b0a-9387-293ed0bb9e16", null, "Utilisateur", "UTILISATEUR" },
+                    { "fe7d83c3-a935-43ac-8e84-08499e834eef", null, "Administrateur", "ADMINISTRATEUR" }
                 });
 
             migrationBuilder.InsertData(
