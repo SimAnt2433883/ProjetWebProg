@@ -8,11 +8,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class adresse : Migration
+    public partial class dtoCommande : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Adresse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoCivique = table.Column<int>(type: "int", nullable: false),
+                    TypeRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NomRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ville = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pays = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Adresse", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -184,16 +202,17 @@ namespace ProjetWebProg.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Payee = table.Column<bool>(type: "bit", nullable: false),
-                    NoCivique = table.Column<int>(type: "int", nullable: false),
-                    TypeRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NomRue = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ville = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Pays = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AdresseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Commande", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Commande_Adresse_AdresseId",
+                        column: x => x.AdresseId,
+                        principalTable: "Adresse",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Commande_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -234,8 +253,8 @@ namespace ProjetWebProg.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "27fe11c7-faad-4671-9fd8-f0725a78f4c2", null, "Utilisateur", "UTILISATEUR" },
-                    { "90792394-343f-4d21-8030-cf8cce042b16", null, "Administrateur", "ADMINISTRATEUR" }
+                    { "071b9d73-7f6f-4692-88f7-28c0b7aa6cb4", null, "Utilisateur", "UTILISATEUR" },
+                    { "e89b8c12-d134-4883-b550-b1fd0c498438", null, "Administrateur", "ADMINISTRATEUR" }
                 });
 
             migrationBuilder.InsertData(
@@ -293,6 +312,11 @@ namespace ProjetWebProg.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Commande_AdresseId",
+                table: "Commande",
+                column: "AdresseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Commande_UserId",
                 table: "Commande",
                 column: "UserId");
@@ -337,6 +361,9 @@ namespace ProjetWebProg.Migrations
 
             migrationBuilder.DropTable(
                 name: "Toutous");
+
+            migrationBuilder.DropTable(
+                name: "Adresse");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

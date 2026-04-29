@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ProjetWebProg.Data;
 using ProjetWebProg.Models.Commande;
+using ProjetWebProg.Models.Toutous;
 
 namespace ProjetWebProg.Configuration
 {
@@ -8,9 +9,12 @@ namespace ProjetWebProg.Configuration
     {
         public AutoMapperConfig()
         {
-            CreateMap<CommandeToutous, PostCommandeDTO>().ReverseMap();
-            CreateMap<Commande, PostCommandeDTO>().ReverseMap();
-            
+            CreateMap<Commande, PostCommandeDTO>()
+                .ForMember(dest => dest.IdsToutousQuantites, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<ToutouQuantiteDTO, CommandeToutous>().ReverseMap();
+            CreateMap<Toutous, GetToutousDTO>();
         }
     }
 }

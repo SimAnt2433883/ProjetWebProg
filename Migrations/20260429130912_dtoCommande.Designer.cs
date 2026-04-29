@@ -12,8 +12,8 @@ using ProjetWebProg.Data;
 namespace ProjetWebProg.Migrations
 {
     [DbContext(typeof(ProjetWebProgContext))]
-    [Migration("20260422134752_adresse")]
-    partial class adresse
+    [Migration("20260429130912_dtoCommande")]
+    partial class dtoCommande
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,13 +86,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "90792394-343f-4d21-8030-cf8cce042b16",
+                            Id = "e89b8c12-d134-4883-b550-b1fd0c498438",
                             Name = "Administrateur",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "27fe11c7-faad-4671-9fd8-f0725a78f4c2",
+                            Id = "071b9d73-7f6f-4692-88f7-28c0b7aa6cb4",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
@@ -269,7 +269,7 @@ namespace ProjetWebProg.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProjetWebProg.Data.Commande", b =>
+            modelBuilder.Entity("ProjetWebProg.Data.Adresse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,9 +284,6 @@ namespace ProjetWebProg.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Payee")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Pays")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -299,15 +296,36 @@ namespace ProjetWebProg.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Ville")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.ToTable("Adresse");
+                });
+
+            modelBuilder.Entity("ProjetWebProg.Data.Commande", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdresseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Payee")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdresseId");
 
                     b.HasIndex("UserId");
 
@@ -490,11 +508,19 @@ namespace ProjetWebProg.Migrations
 
             modelBuilder.Entity("ProjetWebProg.Data.Commande", b =>
                 {
+                    b.HasOne("ProjetWebProg.Data.Adresse", "Adresse")
+                        .WithMany()
+                        .HasForeignKey("AdresseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Adresse");
 
                     b.Navigation("User");
                 });
