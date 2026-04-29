@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ProjetWebProg.Data
+﻿namespace ProjetWebProg.Models.Toutous
 {
-    public class Toutous
+    public class GetToutousDTO
     {
         public int Id { get; set; }
         public required string Nom { get; set; }
@@ -10,9 +8,5 @@ namespace ProjetWebProg.Data
         public string? Description { get; set; }
         public string? Image { get; set; }
         public int NbrInventaire { get; set; }
-
-        [Timestamp]
-        public byte[]? Version { get; set; }
-
     }
 }

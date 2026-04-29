@@ -4,26 +4,11 @@ using ProjetWebProg.Auth;
 
 namespace ProjetWebProg.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController(IAuthManager authManager) : ControllerBase
     {
         private readonly IAuthManager _authManager = authManager;
-        // POST: api/Account/register-admin
-        //[HttpPost]
-        //[Route("register-admin")]
-        //public async Task<ActionResult> RegisterAdmin([FromBody] Models.RegisterModel register)
-        //{
-        //    var errors = await _authManager.RegisterAdmin(register);
-        //    if (errors.Any())
-        //    {
-        //        foreach (var error in errors)
-        //            ModelState.AddModelError(error.Code, error.Description);
-        //        return BadRequest(ModelState);
-        //    }
-        //    return Ok();
-        //}
 
         // POST: api/Account/register-utilisateur
         [HttpPost]
@@ -49,13 +34,6 @@ namespace ProjetWebProg.Controllers
             if (authResponse is null)
                 return Unauthorized();
             return Ok(authResponse);
-        }
-
-        //GET : username
-        [HttpGet]
-        public async Task<ActionResult> UserName()
-        {
-            return Ok();
         }
     }
 }
