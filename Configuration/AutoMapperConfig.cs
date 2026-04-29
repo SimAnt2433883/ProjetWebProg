@@ -10,6 +10,7 @@ namespace ProjetWebProg.Configuration
         {
             CreateMap<CommandeToutous, PostCommandeDTO>().ReverseMap();
             CreateMap<Commande, PostCommandeDTO>().ReverseMap();
+            
         }
     }
 }
