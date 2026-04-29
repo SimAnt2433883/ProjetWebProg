@@ -10,5 +10,7 @@ namespace ProjetWebProg.Data
         public bool Payee { get; set; }
         public int AdresseId { get; set; }
         public Adresse Adresse { get; set; }
+
+        
     }
 }
