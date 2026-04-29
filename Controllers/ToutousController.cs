@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetWebProg.Data;
+using ProjetWebProg.Models.Toutous;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjetWebProg.Controllers
 {
@@ -17,33 +19,33 @@ namespace ProjetWebProg.Controllers
     {
         private readonly ProjetWebProgContext _context;
         private readonly ILogger<ToutousController> _logger;
+        private readonly IMapper _mapper;
 
-        public ToutousController(ProjetWebProgContext context)
+        public ToutousController(ProjetWebProgContext context, ILogger<ToutousController> logger, IMapper mapper)
         {
             _context = context;
+            _logger = logger;
+            _mapper = mapper;
         }
 
         // GET: api/Toutous
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Toutous>>> GetToutous()
+        public async Task<ActionResult<IEnumerable<GetToutousDTO>>> GetToutous()
         {
-            return await _context.Toutous.ToListAsync();
+            var toutous = await _context.Toutous.ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<GetToutousDTO>>(toutous));
         }
 
         // GET: api/Toutous/5
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Toutous>> GetToutous(int id)
+        public async Task<ActionResult<GetToutousDTO>> GetToutous(int id)
         {
             var toutous = await _context.Toutous.FindAsync(id);
-
             if (toutous == null)
-            {
                 return NotFound();
-            }
-
-            return toutous;
+            return Ok(_mapper.Map<GetToutousDTO>(toutous));
         }
 
         // PUT: api/Toutous/5
