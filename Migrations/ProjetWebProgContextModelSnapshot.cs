@@ -24,32 +24,21 @@ namespace ProjetWebProg.Migrations
 
             modelBuilder.Entity("CommandeToutous", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CommandeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdCommande")
                         .HasColumnType("int");
 
                     b.Property<int>("IdToutou")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantite")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ToutousId")
-                        .HasColumnType("int");
+                    b.HasKey("IdCommande", "IdToutou");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommandeId");
-
-                    b.HasIndex("ToutousId");
+                    b.HasIndex("IdToutou");
 
                     b.ToTable("CommandeToutous");
                 });
@@ -83,13 +72,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fe7d83c3-a935-43ac-8e84-08499e834eef",
+                            Id = "f4f84ffe-4832-4ec5-bcdf-0eff21bea3ce",
                             Name = "Administrateur",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "77a1162c-f441-4b0a-9387-293ed0bb9e16",
+                            Id = "5ea006ee-9a3c-4c08-89d6-63d9cf58b738",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
@@ -337,6 +326,9 @@ namespace ProjetWebProg.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("CoupCoeur")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -349,6 +341,9 @@ namespace ProjetWebProg.Migrations
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Nouveau")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Prix")
                         .HasColumnType("int");
@@ -366,73 +361,89 @@ namespace ProjetWebProg.Migrations
                         new
                         {
                             Id = 1,
+                            CoupCoeur = true,
                             Description = "Ours en peluche brun classique",
-                            Image = "bernard.jpg",
+                            Image = "https://static.vecteezy.com/system/resources/previews/044/813/824/non_2x/cute-brown-teddy-bear-stuffed-animal-isolated-on-transparent-background-png.png",
                             NbrInventaire = 10,
                             Nom = "Bernard",
+                            Nouveau = false,
                             Prix = 25
                         },
                         new
                         {
                             Id = 2,
+                            CoupCoeur = false,
                             Description = "Lapin blanc aux longues oreilles",
-                            Image = "lulu.jpg",
+                            Image = "https://png.pngtree.com/png-vector/20250115/ourmid/pngtree-soft-and-cozy-stuffed-bunny-with-realistic-craftsmanship-png-image_15191464.png",
                             NbrInventaire = 15,
                             Nom = "Lulu",
+                            Nouveau = false,
                             Prix = 30
                         },
                         new
                         {
                             Id = 3,
+                            CoupCoeur = false,
                             Description = "Chat gris rayé tout doux",
-                            Image = "felix.jpg",
+                            Image = "https://static.vecteezy.com/system/resources/previews/070/054/567/non_2x/pair-of-cat-plushies-with-soft-fur-brown-and-gray-stripes-sitting-side-by-side-cute-expression-perfect-for-children-cozy-home-decor-matching-toy-set-adorable-companion-png.png",
                             NbrInventaire = 8,
                             Nom = "Félix",
+                            Nouveau = false,
                             Prix = 20
                         },
                         new
                         {
                             Id = 4,
+                            CoupCoeur = false,
                             Description = "Licorne rose avec crinière arc-en-ciel",
-                            Image = "rosie.jpg",
+                            Image = "https://static.vecteezy.com/system/resources/previews/055/131/915/non_2x/rainbow-unicorn-plush-toy-magical-creature-soft-toy-free-png.png",
                             NbrInventaire = 12,
                             Nom = "Rosie",
+                            Nouveau = true,
                             Prix = 35
                         },
                         new
                         {
                             Id = 5,
+                            CoupCoeur = false,
                             Description = "Chien beige avec grandes pattes",
-                            Image = "maxou.jpg",
+                            Image = "https://www.warmbuddy.com/wp-content/uploads/2025/06/Large-Tan-Lab.png",
                             NbrInventaire = 6,
                             Nom = "Maxou",
+                            Nouveau = false,
                             Prix = 28
                         },
                         new
                         {
                             Id = 6,
+                            CoupCoeur = false,
                             Description = "Poisson clown orange et blanc",
-                            Image = "nemo.jpg",
+                            Image = "https://static.vecteezy.com/system/resources/thumbnails/066/570/335/small/a-plush-clownfish-with-orange-and-white-stripes-against-a-plain-surrounding-space-is-presented-here-on-transparent-background-free-png.png",
                             NbrInventaire = 20,
                             Nom = "Nemo",
+                            Nouveau = false,
                             Prix = 22
                         },
                         new
                         {
                             Id = 7,
+                            CoupCoeur = true,
                             Description = "Éléphant gris avec nœud rose",
-                            Image = "bella.jpg",
+                            Image = "https://monde-elephant.com/cdn/shop/products/product-image-1110929609_1024x1024.png?v=1640630300",
                             NbrInventaire = 5,
                             Nom = "Bella",
+                            Nouveau = false,
                             Prix = 40
                         },
                         new
                         {
                             Id = 8,
+                            CoupCoeur = false,
                             Description = "Petit pingouin noir et blanc rigolo",
-                            Image = "coco.jpg",
+                            Image = "https://static.vecteezy.com/system/resources/previews/058/987/777/non_2x/adorable-plush-penguin-toy-with-black-and-white-fur-cut-out-transparent-png.png",
                             NbrInventaire = 14,
                             Nom = "Coco",
+                            Nouveau = false,
                             Prix = 18
                         });
                 });
@@ -441,11 +452,15 @@ namespace ProjetWebProg.Migrations
                 {
                     b.HasOne("ProjetWebProg.Data.Commande", "Commande")
                         .WithMany()
-                        .HasForeignKey("CommandeId");
+                        .HasForeignKey("IdCommande")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProjetWebProg.Data.Toutous", "Toutous")
                         .WithMany()
-                        .HasForeignKey("ToutousId");
+                        .HasForeignKey("IdToutou")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Commande");
 
