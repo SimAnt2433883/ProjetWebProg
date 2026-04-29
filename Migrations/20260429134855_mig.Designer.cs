@@ -12,8 +12,8 @@ using ProjetWebProg.Data;
 namespace ProjetWebProg.Migrations
 {
     [DbContext(typeof(ProjetWebProgContext))]
-    [Migration("20260429130912_dtoCommande")]
-    partial class dtoCommande
+    [Migration("20260429134855_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,13 +86,13 @@ namespace ProjetWebProg.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e89b8c12-d134-4883-b550-b1fd0c498438",
+                            Id = "fe7d83c3-a935-43ac-8e84-08499e834eef",
                             Name = "Administrateur",
                             NormalizedName = "ADMINISTRATEUR"
                         },
                         new
                         {
-                            Id = "071b9d73-7f6f-4692-88f7-28c0b7aa6cb4",
+                            Id = "77a1162c-f441-4b0a-9387-293ed0bb9e16",
                             Name = "Utilisateur",
                             NormalizedName = "UTILISATEUR"
                         });
