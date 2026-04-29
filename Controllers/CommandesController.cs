@@ -31,7 +31,9 @@ namespace ProjetWebProg.Controllers
         [Authorize(Roles = "Administrateur")]
         public async Task<ActionResult<IEnumerable<Commande>>> GetCommande()
         {
-            return await _context.Commande.ToListAsync();
+            return await _context.Commande
+                .Include(c => c.Adresse)
+                .ToListAsync();
         }
 
         // GET: api/Commandes/5
@@ -39,10 +41,16 @@ namespace ProjetWebProg.Controllers
         [Authorize]
         public async Task<ActionResult<Commande>> GetCommande(int id)
         {
-            Commande? commande = await _context.Commande.FindAsync(id);
+            Commande? commande = await _context.Commande
+                .Include(c => c.Adresse)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (commande == null)
                 return NotFound();
+
+            bool isAdmin = User.IsInRole("Administrateur");
+            if (commande.UserId != await GetUserId() && !isAdmin)
+                return Unauthorized();
 
             return commande;
         }
