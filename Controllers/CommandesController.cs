@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetWebProg.Data;
 using ProjetWebProg.Models.Commande;
+using ProjetWebProg.Models.Toutous;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -29,17 +30,48 @@ namespace ProjetWebProg.Controllers
         // GET: api/Commandes
         [HttpGet]
         [Authorize(Roles = "Administrateur")]
-        public async Task<ActionResult<IEnumerable<Commande>>> GetCommande()
+        public async Task<ActionResult<IEnumerable<GetCommandeDTO>>> GetCommande()
         {
-            return await _context.Commande
+            var commandes = await _context.Commande
                 .Include(c => c.Adresse)
                 .ToListAsync();
+
+            List<GetCommandeDTO> result = new();
+
+            foreach (var commande in commandes)
+            {
+                GetCommandeDTO dto = _mapper.Map<GetCommandeDTO>(commande);
+
+                dto.UserId = commande.UserId;
+
+                dto.IdsToutousQuantites = await _context.CommandeToutous
+                    .Where(ct => ct.IdCommande == commande.Id)
+                    .Select(ct => new ToutouQuantiteDTO
+                    {
+                        IdToutou = ct.IdToutou,
+                        Quantite = ct.Quantite,
+                        Toutou = new GetToutousDTO
+                        {
+                            Id = ct.Toutous.Id,
+                            Nom = ct.Toutous.Nom,
+                            Prix = ct.Toutous.Prix,
+                            Description = ct.Toutous.Description,
+                            Image = ct.Toutous.Image,
+                            NbrInventaire = ct.Toutous.NbrInventaire
+                        }
+                    })
+                    .ToArrayAsync();
+
+                result.Add(dto);
+            }
+
+            return result;
         }
 
         // GET: api/Commandes/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Commande>> GetCommande(int id)
+        public async Task<ActionResult<GetCommandeDTO>> GetCommande(int id)
         {
             Commande? commande = await _context.Commande
                 .Include(c => c.Adresse)
@@ -49,10 +81,31 @@ namespace ProjetWebProg.Controllers
                 return NotFound();
 
             bool isAdmin = User.IsInRole("Administrateur");
-            if (commande.UserId != await GetUserId() && !isAdmin)
+            if (commande.UserId != GetUserId() && !isAdmin)
                 return Unauthorized();
 
-            return commande;
+            GetCommandeDTO getCommandeDTO = _mapper.Map<GetCommandeDTO>(commande);
+
+            getCommandeDTO.IdsToutousQuantites = await _context.CommandeToutous
+            .Where(ct => ct.IdCommande == id)
+            .Select(ct => new ToutouQuantiteDTO
+            {
+                IdToutou = ct.IdToutou,
+                Quantite = ct.Quantite,
+                Toutou = new GetToutousDTO
+                {
+                    Id = ct.Toutous.Id,
+                    Nom = ct.Toutous.Nom,
+                    Prix = ct.Toutous.Prix,
+                    Description = ct.Toutous.Description,
+                    Image = ct.Toutous.Image,
+                    NbrInventaire = ct.Toutous.NbrInventaire
+                }
+
+            })
+            .ToArrayAsync();
+
+            return getCommandeDTO;
         }
 
         // PUT: api/Commandes/5
@@ -93,7 +146,7 @@ namespace ProjetWebProg.Controllers
         {
             Console.WriteLine($"Count: {commandeDto.IdsToutousQuantites?.Length ?? 0}");
             Commande commande = _mapper.Map<Commande>(commandeDto);
-            commande.UserId = await GetUserId();
+            commande.UserId = GetUserId();
             commande.Payee = false;
 
             _context.Commande.Add(commande);
@@ -110,8 +163,30 @@ namespace ProjetWebProg.Controllers
             }
             await _context.SaveChangesAsync();
 
-            PostCommandeDTO result = _mapper.Map<PostCommandeDTO>(commande);
-            result.IdsToutousQuantites = commandeDto.IdsToutousQuantites; // add this
+            var fullCommande = await _context.Commande
+                .Include(c => c.Adresse)
+                .FirstOrDefaultAsync(c => c.Id == commande.Id);
+
+            var result = _mapper.Map<GetCommandeDTO>(fullCommande);
+
+            result.IdsToutousQuantites = await _context.CommandeToutous
+                .Where(ct => ct.IdCommande == commande.Id)
+                .Select(ct => new ToutouQuantiteDTO
+                {
+                    IdToutou = ct.IdToutou,
+                    Quantite = ct.Quantite,
+                    Toutou = new GetToutousDTO
+                    {
+                        Id = ct.Toutous.Id,
+                        Nom = ct.Toutous.Nom,
+                        Prix = ct.Toutous.Prix,
+                        Description = ct.Toutous.Description,
+                        Image = ct.Toutous.Image,
+                        NbrInventaire = ct.Toutous.NbrInventaire
+                    }
+                })
+                .ToArrayAsync();
+
             return CreatedAtAction(nameof(GetCommande), new { id = commande.Id }, result);
         }
 
@@ -137,13 +212,9 @@ namespace ProjetWebProg.Controllers
             return _context.Commande.Any(e => e.Id == id);
         }
 
-        private async Task<string?> GetUserId()
+        private string GetUserId()
         {
-            string? username = HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
-                ?? HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            var user = await _userManager.FindByNameAsync(username);
-            return user?.Id;
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }

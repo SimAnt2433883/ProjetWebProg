@@ -8,5 +8,7 @@
         public string? Description { get; set; }
         public string? Image { get; set; }
         public int NbrInventaire { get; set; }
+        public bool CoupCoeur { get; set; }
+        public bool Nouveau { get; set; }
     }
 }

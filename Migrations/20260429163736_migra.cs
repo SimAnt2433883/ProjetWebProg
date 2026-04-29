@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetWebProg.Migrations
 {
     /// <inheritdoc />
-    public partial class mig : Migration
+    public partial class migra : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -81,6 +81,8 @@ namespace ProjetWebProg.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NbrInventaire = table.Column<int>(type: "int", nullable: false),
+                    CoupCoeur = table.Column<bool>(type: "bit", nullable: false),
+                    Nouveau = table.Column<bool>(type: "bit", nullable: false),
                     Version = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -225,27 +227,26 @@ namespace ProjetWebProg.Migrations
                 name: "CommandeToutous",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     IdCommande = table.Column<int>(type: "int", nullable: false),
                     IdToutou = table.Column<int>(type: "int", nullable: false),
-                    Quantite = table.Column<int>(type: "int", nullable: false),
-                    CommandeId = table.Column<int>(type: "int", nullable: true),
-                    ToutousId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Quantite = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommandeToutous", x => x.Id);
+                    table.PrimaryKey("PK_CommandeToutous", x => new { x.IdCommande, x.IdToutou });
                     table.ForeignKey(
-                        name: "FK_CommandeToutous_Commande_CommandeId",
-                        column: x => x.CommandeId,
+                        name: "FK_CommandeToutous_Commande_IdCommande",
+                        column: x => x.IdCommande,
                         principalTable: "Commande",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CommandeToutous_Toutous_ToutousId",
-                        column: x => x.ToutousId,
+                        name: "FK_CommandeToutous_Toutous_IdToutou",
+                        column: x => x.IdToutou,
                         principalTable: "Toutous",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -253,23 +254,23 @@ namespace ProjetWebProg.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "77a1162c-f441-4b0a-9387-293ed0bb9e16", null, "Utilisateur", "UTILISATEUR" },
-                    { "fe7d83c3-a935-43ac-8e84-08499e834eef", null, "Administrateur", "ADMINISTRATEUR" }
+                    { "5ea006ee-9a3c-4c08-89d6-63d9cf58b738", null, "Utilisateur", "UTILISATEUR" },
+                    { "f4f84ffe-4832-4ec5-bcdf-0eff21bea3ce", null, "Administrateur", "ADMINISTRATEUR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Toutous",
-                columns: new[] { "Id", "Description", "Image", "NbrInventaire", "Nom", "Prix" },
+                columns: new[] { "Id", "CoupCoeur", "Description", "Image", "NbrInventaire", "Nom", "Nouveau", "Prix" },
                 values: new object[,]
                 {
-                    { 1, "Ours en peluche brun classique", "bernard.jpg", 10, "Bernard", 25 },
-                    { 2, "Lapin blanc aux longues oreilles", "lulu.jpg", 15, "Lulu", 30 },
-                    { 3, "Chat gris rayé tout doux", "felix.jpg", 8, "Félix", 20 },
-                    { 4, "Licorne rose avec crinière arc-en-ciel", "rosie.jpg", 12, "Rosie", 35 },
-                    { 5, "Chien beige avec grandes pattes", "maxou.jpg", 6, "Maxou", 28 },
-                    { 6, "Poisson clown orange et blanc", "nemo.jpg", 20, "Nemo", 22 },
-                    { 7, "Éléphant gris avec nœud rose", "bella.jpg", 5, "Bella", 40 },
-                    { 8, "Petit pingouin noir et blanc rigolo", "coco.jpg", 14, "Coco", 18 }
+                    { 1, true, "Ours en peluche brun classique", "https://static.vecteezy.com/system/resources/previews/044/813/824/non_2x/cute-brown-teddy-bear-stuffed-animal-isolated-on-transparent-background-png.png", 10, "Bernard", false, 25 },
+                    { 2, false, "Lapin blanc aux longues oreilles", "https://png.pngtree.com/png-vector/20250115/ourmid/pngtree-soft-and-cozy-stuffed-bunny-with-realistic-craftsmanship-png-image_15191464.png", 15, "Lulu", false, 30 },
+                    { 3, false, "Chat gris rayé tout doux", "https://static.vecteezy.com/system/resources/previews/070/054/567/non_2x/pair-of-cat-plushies-with-soft-fur-brown-and-gray-stripes-sitting-side-by-side-cute-expression-perfect-for-children-cozy-home-decor-matching-toy-set-adorable-companion-png.png", 8, "Félix", false, 20 },
+                    { 4, false, "Licorne rose avec crinière arc-en-ciel", "https://static.vecteezy.com/system/resources/previews/055/131/915/non_2x/rainbow-unicorn-plush-toy-magical-creature-soft-toy-free-png.png", 12, "Rosie", true, 35 },
+                    { 5, false, "Chien beige avec grandes pattes", "https://www.warmbuddy.com/wp-content/uploads/2025/06/Large-Tan-Lab.png", 6, "Maxou", false, 28 },
+                    { 6, false, "Poisson clown orange et blanc", "https://static.vecteezy.com/system/resources/thumbnails/066/570/335/small/a-plush-clownfish-with-orange-and-white-stripes-against-a-plain-surrounding-space-is-presented-here-on-transparent-background-free-png.png", 20, "Nemo", false, 22 },
+                    { 7, true, "Éléphant gris avec nœud rose", "https://monde-elephant.com/cdn/shop/products/product-image-1110929609_1024x1024.png?v=1640630300", 5, "Bella", false, 40 },
+                    { 8, false, "Petit pingouin noir et blanc rigolo", "https://static.vecteezy.com/system/resources/previews/058/987/777/non_2x/adorable-plush-penguin-toy-with-black-and-white-fur-cut-out-transparent-png.png", 14, "Coco", false, 18 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -322,14 +323,9 @@ namespace ProjetWebProg.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommandeToutous_CommandeId",
+                name: "IX_CommandeToutous_IdToutou",
                 table: "CommandeToutous",
-                column: "CommandeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CommandeToutous_ToutousId",
-                table: "CommandeToutous",
-                column: "ToutousId");
+                column: "IdToutou");
         }
 
         /// <inheritdoc />

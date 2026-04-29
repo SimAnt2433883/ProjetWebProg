@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ProjetWebProg.Data;
+using ProjetWebProg.Models.Toutous;
 
 namespace ProjetWebProg.Models.Commande
 {
@@ -7,6 +8,7 @@ namespace ProjetWebProg.Models.Commande
     {
         public int IdToutou { get; set; }
         public int Quantite { get; set; }
+        public GetToutousDTO? Toutou { get; set; }
     }
 
     public class PostCommandeDTO
