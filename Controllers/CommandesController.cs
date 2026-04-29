@@ -124,7 +124,7 @@ namespace ProjetWebProg.Controllers
             return _context.Commande.Any(e => e.Id == id);
         }
 
-        public string? GetUserName()
+        private string? GetUserName()
         {
             return HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value
             ?? HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
