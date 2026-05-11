@@ -77,6 +77,14 @@ public class Program
 
         builder.Services.AddScoped<IAuthManager, AuthManager>();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll",
+                b => b.AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod());
+        });
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -87,6 +95,7 @@ public class Program
 
         app.UseSerilogRequestLogging();
 
+        app.UseCors();
         app.UseHttpsRedirection();
         app.UseCors();
         app.UseAuthentication();
