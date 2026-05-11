@@ -57,7 +57,8 @@ namespace ProjetWebProg.Controllers
                             Prix = ct.Toutous.Prix,
                             Description = ct.Toutous.Description,
                             Image = ct.Toutous.Image,
-                            NbrInventaire = ct.Toutous.NbrInventaire
+                            NbrInventaire = ct.Toutous.NbrInventaire,
+                            PriceId = ct.Toutous.PriceId
                         }
                     })
                     .ToArrayAsync();
@@ -99,7 +100,8 @@ namespace ProjetWebProg.Controllers
                     Prix = ct.Toutous.Prix,
                     Description = ct.Toutous.Description,
                     Image = ct.Toutous.Image,
-                    NbrInventaire = ct.Toutous.NbrInventaire
+                    NbrInventaire = ct.Toutous.NbrInventaire,
+                    PriceId = ct.Toutous.PriceId
                 }
 
             })
@@ -182,7 +184,8 @@ namespace ProjetWebProg.Controllers
                         Prix = ct.Toutous.Prix,
                         Description = ct.Toutous.Description,
                         Image = ct.Toutous.Image,
-                        NbrInventaire = ct.Toutous.NbrInventaire
+                        NbrInventaire = ct.Toutous.NbrInventaire,
+                        PriceId = ct.Toutous.PriceId
                     }
                 })
                 .ToArrayAsync();
