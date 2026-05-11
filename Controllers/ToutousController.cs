@@ -88,7 +88,6 @@ namespace ProjetWebProg.Controllers
         [Authorize(Roles = "Administrateur")]
         public async Task<ActionResult<Toutous>> PostToutous(Toutous toutous)
         {
-
             _context.Toutous.Add(toutous);
             await _context.SaveChangesAsync();
 
@@ -100,19 +99,14 @@ namespace ProjetWebProg.Controllers
         [Authorize(Roles = "Adminstrateur")]
         public async Task<IActionResult> DeleteToutous(int id)
         {
-            
             try
             {
                 var toutous = await _context.Toutous.FindAsync(id);
                 if (toutous == null)
-                {
                     return NotFound();
-                }
                 
                 _context.Toutous.Remove(toutous);
                 await _context.SaveChangesAsync();
-                              
-
             }
             catch(DbUpdateConcurrencyException ex)
             {
@@ -122,13 +116,9 @@ namespace ProjetWebProg.Controllers
                     Message = "Une erreur est survenue.",
                     Error = ex.Message
                 });
-            
             }
-            
-         
 
             return NoContent();
         }
-
     }
 }

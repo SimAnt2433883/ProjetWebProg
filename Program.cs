@@ -49,6 +49,17 @@ public class Program
         });
 
         builder.Services.AddControllers();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyOrigin()
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+            });
+        });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -66,6 +77,14 @@ public class Program
 
         builder.Services.AddScoped<IAuthManager, AuthManager>();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll",
+                b => b.AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod());
+        });
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -76,7 +95,9 @@ public class Program
 
         app.UseSerilogRequestLogging();
 
+        app.UseCors();
         app.UseHttpsRedirection();
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();

@@ -30,7 +30,7 @@ namespace ProjetWebProg.Controllers
         // GET: api/Commandes
         [HttpGet]
         [Authorize(Roles = "Administrateur")]
-        public async Task<ActionResult<IEnumerable<GetCommandeDTO>>> GetCommande()
+        public async Task<ActionResult<IEnumerable<GetCommandeDTO>>> GetCommandes()
         {
             var commandes = await _context.Commande
                 .Include(c => c.Adresse)
@@ -57,7 +57,8 @@ namespace ProjetWebProg.Controllers
                             Prix = ct.Toutous.Prix,
                             Description = ct.Toutous.Description,
                             Image = ct.Toutous.Image,
-                            NbrInventaire = ct.Toutous.NbrInventaire
+                            NbrInventaire = ct.Toutous.NbrInventaire,
+                            PriceId = ct.Toutous.PriceId
                         }
                     })
                     .ToArrayAsync();
@@ -99,7 +100,8 @@ namespace ProjetWebProg.Controllers
                     Prix = ct.Toutous.Prix,
                     Description = ct.Toutous.Description,
                     Image = ct.Toutous.Image,
-                    NbrInventaire = ct.Toutous.NbrInventaire
+                    NbrInventaire = ct.Toutous.NbrInventaire,
+                    PriceId = ct.Toutous.PriceId
                 }
 
             })
@@ -114,9 +116,7 @@ namespace ProjetWebProg.Controllers
         public async Task<IActionResult> PutCommande(int id, Commande commande)
         {
             if (id != commande.Id)
-            {
                 return BadRequest();
-            }
 
             _context.Entry(commande).State = EntityState.Modified;
 
@@ -182,7 +182,8 @@ namespace ProjetWebProg.Controllers
                         Prix = ct.Toutous.Prix,
                         Description = ct.Toutous.Description,
                         Image = ct.Toutous.Image,
-                        NbrInventaire = ct.Toutous.NbrInventaire
+                        NbrInventaire = ct.Toutous.NbrInventaire,
+                        PriceId = ct.Toutous.PriceId
                     }
                 })
                 .ToArrayAsync();
@@ -197,9 +198,7 @@ namespace ProjetWebProg.Controllers
         {
             var commande = await _context.Commande.FindAsync(id);
             if (commande == null)
-            {
                 return NotFound();
-            }
 
             _context.Commande.Remove(commande);
             await _context.SaveChangesAsync();
