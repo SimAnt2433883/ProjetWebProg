@@ -9,6 +9,7 @@ bin/
 obj/
 .vs/
 Logs/
+appsettings.json
 
 # User-specific stuff
 .idea/**/workspace.xml

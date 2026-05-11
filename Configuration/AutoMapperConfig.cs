@@ -15,6 +15,7 @@ namespace ProjetWebProg.Configuration
 
             CreateMap<ToutouQuantiteDTO, CommandeToutous>().ReverseMap();
             CreateMap<Toutous, GetToutousDTO>();
+            CreateMap<Commande, GetCommandeDTO>();
         }
     }
 }

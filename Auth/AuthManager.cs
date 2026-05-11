@@ -71,7 +71,7 @@ register)
             var userClaims = await _userManager.GetClaimsAsync(_user);
             var claims = new List<Claim>
             {
-                new (JwtRegisteredClaimNames.Sub, _user.UserName),
+                new (JwtRegisteredClaimNames.Sub, _user.Id),
                 new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new (JwtRegisteredClaimNames.Email, _user.Email),
             }.Union(userClaims).Union(roleClaims);
